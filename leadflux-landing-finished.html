@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leadflux Studio — Build Smarter. Scale Faster.</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Modern web design, AI-powered chatbots, and SEO solutions for businesses ready to scale. Get custom high-performing websites with smart automation." />
+  <meta name="keywords" content="web design, AI chatbots, SEO optimization, digital marketing, website development, business scaling" />
+  <meta name="author" content="Leadflux Studio" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Leadflux Studio - Build Smarter. Scale Faster." />
+  <meta property="og:description" content="Modern web design, AI-powered chatbots, and SEO solutions for businesses ready to scale." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leadfluxstudio.com" />
+  <meta property="og:image" content="https://leadfluxstudio.com/og-image.jpg" />
+  <meta property="og:site_name" content="Leadflux Studio" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Leadflux Studio - Build Smarter. Scale Faster." />
+  <meta name="twitter:description" content="Modern web design, AI-powered chatbots, and SEO solutions for businesses ready to scale." />
+  <meta name="twitter:image" content="https://leadfluxstudio.com/twitter-image.jpg" />
+
+  <!-- Schema.org Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Leadflux Studio",
+    "description": "Web design and marketing agency specializing in modern websites, AI chatbots, and SEO",
+    "url": "https://leadfluxstudio.com",
+    "logo": "https://leadfluxstudio.com/logo.png",
+    "sameAs": [
+      "https://www.tiktok.com/@leadfluxstudio",
+      "https://www.instagram.com/leadfluxstudio",
+      "https://www.facebook.com/share/16tbPibHRy/"
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      --navy:#00005A;
+      --white:#ffffff;
+      --black:#000000;
+      --cyan:#00FFFF;
+      --cyan-20: rgba(0,255,255,.2);
+      --cyan-40: rgba(0,255,255,.4);
+      --gray:#8892b0;
+    }
+    html { scroll-behavior:smooth; }
+    body{
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x:hidden;
+      position:relative;
+    }
+    /* global vignette */
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 100%);
+      z-index:0;
+    }
+    .container{ max-width:1200px; margin:0 auto; padding:0 20px; position:relative; z-index:1; }
+
+    /* Navbar */
+    nav{
+      position:fixed; inset:0 0 auto 0;
+      padding:18px 0;
+      background: rgba(0,0,90,0.0);
+      transition: background .3s ease, box-shadow .3s ease, padding .3s ease;
+      z-index:1000;
+    }
+    nav.scrolled{
+      background: rgba(0,0,90,0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+      padding:12px 0;
+    }
+    .nav-wrap{ display:flex; align-items:center; justify-content:space-between; }
+    .logo{
+      font-weight:800; letter-spacing:-.5px; font-size:22px;
+      color: var(--white);
+      text-decoration:none;
+    }
+    .nav-links{ list-style:none; display:flex; gap:34px; }
+    .nav-links a{
+      color: var(--white);
+      text-decoration:none;
+      font-weight:600;
+      position:relative;
+    }
+    .nav-links a::after{
+      content:''; position:absolute; left:0; bottom:-6px; height:2px; width:0;
+      background: var(--cyan);
+      transition:width .25s ease;
+    }
+    .nav-links a:hover::after{ width:100%; }
+
+    .hamburger{ display:none; flex-direction:column; gap:5px; cursor:pointer; }
+    .hamburger span{ width:26px; height:2px; background:var(--white); transition: transform .25s ease, opacity .25s ease; }
+    .hamburger.active span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2){ opacity:0; }
+    .hamburger.active span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav */
+    @media (max-width: 900px){
+      .nav-links{
+        position:absolute; top:100%; right:0; left:0;
+        background: rgba(0,0,90,.98);
+        display:none; flex-direction:column; gap:18px; padding:18px 22px 22px;
+        border-top:1px solid var(--cyan-20);
+      }
+      .nav-links.active{ display:flex; }
+      .hamburger{ display:flex; }
+    }
+
+    /* Hero */
+    .hero{ min-height:100svh; display:grid; place-items:center; padding-top:90px; position:relative; }
+    .hero .particles{ position:absolute; inset:0; overflow:hidden; z-index:0; }
+    .particle{ position:absolute; width:4px; height:4px; border-radius:50%; background:var(--cyan); opacity:.25; animation: float 18s linear infinite; }
+    @keyframes float{
+      0%{ transform: translateY(110%) translateX(0); }
+      100%{ transform: translateY(-110%) translateX(120px); }
+    }
+    .hero-inner{ text-align:center; position:relative; z-index:1; }
+    .hero h1{
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight:800;
+      margin-bottom:14px;
+      color:#fff;
+      animation: fadeUp .8s ease both;
+    }
+    .hero p.sub{ color: var(--white); opacity:.9; font-size: clamp(16px, 2.3vw, 20px); margin-bottom:32px; animation: fadeUp 1s .1s both; }
+    .cta-row{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; animation: fadeUp 1s .2s both; }
+    .btn{ padding:14px 28px; border-radius:999px; border:2px solid transparent; font-weight:700; text-decoration:none; display:inline-block; transition:transform .2s, box-shadow .2s, background .2s, color .2s, border-color .2s; }
+    .btn-primary{ background:#fff; color: var(--navy); border-color:#fff; }
+    .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 0 28px rgba(255,255,255,.35); }
+    .btn-secondary{ background: transparent; color:#fff; border-color:#fff; }
+    .btn-secondary:hover{ background:#fff; color: var(--navy); transform: translateY(-2px); }
+
+    /* Sections */
+    section{ position:relative; }
+    .section-title{ text-align:center; font-size: clamp(28px, 4vw, 48px); font-weight:800; margin-bottom:50px; opacity:0; transform: translateY(20px); }
+    .section-title.animate{ animation: fadeUp .6s ease both; }
+
+    /* Services */
+    .services{ padding:90px 0; }
+    .services-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:26px; }
+    .card{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--cyan-20);
+      border-radius:20px; padding:28px;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      opacity:0; transform: translateY(20px);
+    }
+    .card.animate{ animation: fadeUp .6s ease both; }
+    .card:hover{ transform: translateY(-8px); box-shadow: 0 12px 36px rgba(0,255,255,.18); border-color: var(--cyan); }
+    .card .icon{
+      width:58px; height:58px; border-radius:14px;
+      background: linear-gradient(135deg, var(--cyan), rgba(0,255,255,.7));
+      display:grid; place-items:center; font-size:26px; margin-bottom:14px;
+    }
+    .card h3{ font-size:22px; margin:8px 0 8px; }
+    .card p{ color: var(--gray); line-height:1.7; }
+
+    /* Process */
+    .process{ padding:90px 0; background: rgba(0,0,40,.45); }
+    .timeline{ display:flex; justify-content:space-between; gap:20px; position:relative; margin-top:34px; }
+    .timeline::before{
+      content:''; position:absolute; left:10%; right:10%; top:30px; height:2px; background: linear-gradient(90deg, var(--cyan), rgba(0,255,255,.5));
+      opacity:.35;
+    }
+    .step{ flex:1; text-align:center; opacity:0; transform: translateY(20px); }
+    .step.animate{ animation: fadeUp .6s ease both; }
+    .step .bubble{
+      width:60px; height:60px; border-radius:999px; display:grid; place-items:center; margin:0 auto 12px;
+      border:2px solid var(--cyan); background: transparent; font-weight:800;
+      transition: background .25s ease, box-shadow .25s ease, color .25s ease;
+    }
+    .step:hover .bubble{ background: var(--cyan); color: var(--navy); box-shadow: 0 0 22px var(--cyan-40); }
+    .step h4{ font-size:18px; margin-bottom:6px; }
+    .step p{ color: var(--gray); max-width:220px; margin:0 auto; font-size:14px; }
+
+    /* FAQ */
+    .faq{ padding:90px 0; }
+    .faq-wrap{ max-width:820px; margin:0 auto; }
+    .faq-item{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--cyan-20);
+      border-radius:14px; margin-bottom:16px; overflow:hidden;
+      opacity:0; transform: translateY(20px);
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+    .faq-item.animate{ animation: fadeUp .6s ease both; }
+    .faq-item.active{ border-color: var(--cyan); box-shadow: 0 0 24px rgba(0,255,255,.18); }
+    .faq-q{
+      padding:20px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px; cursor:pointer;
+    }
+    .faq-q h3{ font-size:18px; }
+    .arrow{ width:18px; height:18px; transition: transform .25s ease; }
+    .faq-item.active .arrow{ transform: rotate(180deg); }
+    .faq-a{ max-height:0; overflow:hidden; transition: max-height .3s ease; }
+    .faq-a .inner{ padding:0 22px 20px; color: var(--gray); line-height:1.7; }
+    .faq-item.active .faq-a{ max-height:300px; }
+
+    /* About */
+    .about{ padding:90px 0; background: rgba(0,0,40,.45); }
+    .about-grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:50px; align-items:center; }
+    .about-text{ opacity:0; transform: translateX(-18px); }
+    .about-text.animate{ animation: fadeLeft .6s both; }
+    .about-text h2{ font-size: clamp(28px, 4vw, 44px); margin-bottom:14px; }
+    .about-text p{ color: var(--gray); line-height:1.8; margin-bottom:10px; }
+    .illustration{ height:380px; border-radius:18px; border:2px solid var(--cyan-20); background: linear-gradient(135deg, rgba(0,255,255,.08), rgba(0,255,255,.02)); position:relative; overflow:hidden; opacity:0; transform: translateX(18px); }
+    .illustration.animate{ animation: fadeRight .6s both; }
+    .illustration::before{
+      content:''; position:absolute; inset:-40% -40%; background: linear-gradient(45deg, transparent, rgba(0,255,255,.28), transparent);
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* Contact */
+    .contact{ padding:90px 0 110px; }
+    .form-shell{ max-width:640px; margin:0 auto; opacity:0; transform: translateY(20px); }
+    .form-shell.animate{ animation: fadeUp .6s ease both; }
+    .form-group{ margin-bottom:18px; }
+    label{ display:block; margin-bottom:8px; font-weight:600; }
+    input, select, textarea{
+      width:100%; padding:14px 14px;
+      background: rgba(255,255,255,.05);
+      border:1px solid var(--cyan-20);
+      color:#fff; border-radius:12px; font-family: inherit;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    input:focus, select:focus, textarea:focus{
+      outline: none; border-color: var(--cyan); box-shadow: 0 0 18px rgba(0,255,255,.22);
+    }
+    textarea{ resize:vertical; min-height:120px; }
+    .form-message{ display:none; padding:12px 14px; border-radius:10px; margin-bottom:14px; }
+    .form-message.success{ display:none; background: rgba(0,255,0,.12); color:#00ff84; border:1px solid rgba(0,255,0,.35); }
+    .form-message.error{ display:none; background: rgba(255,0,0,.12); color:#ff6b6b; border:1px solid rgba(255,0,0,.35); }
+
+    /* Footer */
+    footer{ padding:38px 0; border-top:1px solid var(--cyan-20); }
+    .footer-flex{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .footer-text{ color: var(--gray); }
+    .social{ display:flex; gap:16px; }
+    .icon-btn{ width:40px; height:40px; display:grid; place-items:center; border-radius:999px; color:#fff; text-decoration:none; border:1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.05); transition: transform .2s, box-shadow .2s, background .2s, color .2s, border-color .2s; }
+    .icon-btn:hover{ background: var(--cyan); color: var(--navy); border-color: var(--cyan); transform: translateY(-3px); box-shadow:0 0 20px rgba(0,255,255,.45); }
+
+    /* Keyframes */
+    @keyframes fadeUp{ from{opacity:0; transform: translateY(18px);} to{opacity:1; transform: translateY(0);} }
+    @keyframes fadeLeft{ from{opacity:0; transform: translateX(-18px);} to{opacity:1; transform: translateX(0);} }
+    @keyframes fadeRight{ from{opacity:0; transform: translateX(18px);} to{opacity:1; transform: translateX(0);} }
+    @keyframes shimmer{ 0%{ transform: rotate(0);} 100%{ transform: rotate(360deg);} }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .about-grid{ grid-template-columns: 1fr; }
+      .timeline{ flex-direction:column; }
+      .timeline::before{ left:30px; right:auto; height: calc(100% - 60px); width:2px; top:0; }
+      .step{ text-align:left; display:flex; align-items:flex-start; gap:14px; }
+      .step .bubble{ margin: 0; }
+      .cta-row{ flex-direction:column; }
+      .btn{ width:100%; max-width:320px; }
+      .hero{ padding-top:84px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="#home" class="logo">LEADFLUX STUDIO</a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="particles" id="particles"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <h1>Build Smarter. Scale Faster.<br/>Lead with Leadflux Studio.</h1>
+        <p class="sub">Modern web design, AI-powered chatbots, and SEO solutions for businesses ready to scale.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Get a FREE Preview</a>
+          <a class="btn btn-secondary" href="#services">Our Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="services">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <div class="services-grid">
+        <div class="card">
+          <div class="icon">🎨</div>
+          <h3>Website Design</h3>
+          <p>Custom, high-performing sites built to convert visitors into customers with modern, responsive designs.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🤖</div>
+          <h3>AI Chatbots</h3>
+          <p>Smart, built-in automation that engages visitors 24/7 and captures leads while you sleep.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🚀</div>
+          <h3>SEO Optimization</h3>
+          <p>Rank higher and get found faster with strategic optimization that drives organic traffic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="process">
+    <div class="container">
+      <h2 class="section-title">Our Process</h2>
+      <div class="timeline">
+        <div class="step">
+          <div class="bubble">1</div>
+          <div>
+            <h4>Discovery</h4>
+            <p>Understanding your goals and vision.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="bubble">2</div>
+          <div>
+            <h4>Design</h4>
+            <p>Crafting modern, responsive websites.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="bubble">3</div>
+          <div>
+            <h4>Build & Integrate</h4>
+            <p>Development + chatbot + SEO.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="bubble">4</div>
+          <div>
+            <h4>Launch & Support</h4>
+            <p>Go live and scale your business.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-wrap">
+        <div class="faq-item">
+          <div class="faq-q">
+            <h3>How long does it take to build a website?</h3>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-a"><div class="inner">Most sites launch within 2–4 weeks, depending on scope, revisions, and integrations. We share a clear timeline after discovery.</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h3>Do you also handle SEO?</h3>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-a"><div class="inner">Yes. Technical SEO is included by default. We also offer ongoing content and backlink strategies to keep you moving up.</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h3>Can you integrate AI chatbots into my existing site?</h3>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-a"><div class="inner">Absolutely. We embed AI chatbots that match your brand and capture qualified leads, even if your site wasn’t built by us.</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h3>Do you provide ongoing support?</h3>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-a"><div class="inner">Yes. We offer maintenance, updates, and growth plans—including analytics, A/B tests, and new features as you scale.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Design that converts. Tech that scales.</h2>
+          <p>Leadflux Studio builds lightning-fast websites with a modern, futuristic aesthetic. We integrate AI chatbots and SEO from day one to turn traffic into revenue.</p>
+          <p>Our approach blends strategy, design, and engineering—so you get a site that looks incredible and performs even better.</p>
+        </div>
+        <div class="illustration" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title">Get a FREE Preview</h2>
+      <form id="leadForm" class="form-shell" action="https://formspree.io/f/xgvzqlbv" method="POST">
+        <div id="formSuccess" class="form-message success">Thanks! We’ll get back to you shortly.</div>
+        <div id="formError" class="form-message error">Something went wrong. Please try again.</div>
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="_replyto" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="type">Business / Project Type</label>
+          <select id="type" name="project_type" required>
+            <option value="">Select an option</option>
+            <option>Local Service Business</option>
+            <option>E‑commerce</option>
+            <option>Personal Brand / Coach</option>
+            <option>Restaurant / Hospitality</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us what you’re building…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Request</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-flex">
+        <div class="footer-text">© 2025 Leadflux Studio — Scaling Businesses with Web Design & AI.</div>
+        <div class="social">
+          <a class="icon-btn" href="https://www.tiktok.com/@leadfluxstudio?_t=ZP-8yshYj5PXyg&_r=1" target="_blank" aria-label="TikTok" rel="noopener">
+            <!-- TikTok SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.9 2h3.1c.3 1.2 1 2.2 2 2.9s2.1 1.1 3.3 1.2v3.2c-1.6 0-3.1-.4-4.5-1.2v6.7c0 4-3.3 7.2-7.3 7.2S2 18.8 2 14.8 5.2 7.6 9.2 7.6c.5 0 1 .1 1.5.2v3.4c-.5-.2-1-.3-1.5-.3-2.1 0-3.9 1.7-3.9 3.9s1.8 3.8 3.9 3.8 3.8-1.7 3.8-3.8V2z"/>
+            </svg>
+          </a>
+          <a class="icon-btn" href="https://www.instagram.com/leadfluxstudio?igsh=enQ2NGNqZmxkaDVk&utm_source=qr" target="_blank" aria-label="Instagram" rel="noopener">
+            <!-- Instagram SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
+            </svg>
+          </a>
+          <a class="icon-btn" href="https://www.facebook.com/share/16tbPibHRy/?mibextid=wwXIfr" target="_blank" aria-label="Facebook" rel="noopener">
+            <!-- Facebook SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M13 3h4a1 1 0 0 1 1 1v3h-3a2 2 0 0 0-2 2v3h4l-1 4h-3v7h-4v-7H6v-4h3V9a5 5 0 0 1 5-5z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbase Widget -->
+  <script>
+    window.embeddedChatbotConfig = {
+      chatbotId: "0g4jgxlcgakdkwiqmvts02do0y7i21cj",
+      domain: "www.chatbase.co"
+    };
+  </script>
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="0g4jgxlcgakdkwiqmvts02do0y7i21cj" defer></script>
+
+  <!-- Interactivity / Animations / Form AJAX -->
+  <script>
+    // Navbar scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    // Mobile nav toggle
+    const burger = document.getElementById('hamburger');
+    const links = document.getElementById('navLinks');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      const open = burger.classList.contains('active');
+      burger.setAttribute('aria-expanded', String(open));
+      links.classList.toggle('active');
+    });
+    // Close menu on link click (mobile)
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      if (links.classList.contains('active')) {
+        links.classList.remove('active');
+        burger.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    }));
+
+    // Particles
+    const particles = document.getElementById('particles');
+    const makeParticle = () => {
+      const p = document.createElement('span');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = 12 + Math.random() * 16 + 's';
+      p.style.opacity = 0.15 + Math.random() * 0.3;
+      particles.appendChild(p);
+      setTimeout(() => p.remove(), 30000);
+    };
+    for(let i=0;i<40;i++) makeParticle();
+    setInterval(makeParticle, 1200);
+
+    // Intersection animations
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('animate');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:.15});
+    document.querySelectorAll('.section-title, .card, .step, .faq-item, .about-text, .illustration, .form-shell').forEach(el=>io.observe(el));
+
+    // FAQ toggles
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.querySelector('.faq-q').addEventListener('click', ()=>{
+        item.classList.toggle('active');
+      });
+    });
+
+    // Formspree AJAX (inline success/error, no redirect)
+    const form = document.getElementById('leadForm');
+    const success = document.getElementById('formSuccess');
+    const errorEl = document.getElementById('formError');
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      success.style.display = 'none';
+      errorEl.style.display = 'none';
+
+      const data = new FormData(form);
+      try{
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: data
+        });
+        if(res.ok){
+          success.style.display = 'block';
+          form.reset();
+        } else {
+          const json = await res.json().catch(()=>({}));
+          errorEl.textContent = (json && json.errors && json.errors[0] && json.errors[0].message) || 'Something went wrong. Please try again.';
+          errorEl.style.display = 'block';
+        }
+      }catch(err){
+        errorEl.textContent = 'Network error. Please try again.';
+        errorEl.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
