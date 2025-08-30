@@ -543,54 +543,68 @@
     for(let i=0;i<40;i++) makeParticle();
     setInterval(makeParticle, 1200);
 
-    // Intersection animations
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add('animate');
-          io.unobserve(e.target);
-        }
-      });
-    }, {threshold:.15});
-    document.querySelectorAll('.section-title, .card, .step, .faq-item, .about-text, .illustration, .form-shell').forEach(el=>io.observe(el));
-
-    // FAQ toggles
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      item.querySelector('.faq-q').addEventListener('click', ()=>{
-        item.classList.toggle('active');
-      });
-    });
-
-    // Formspree AJAX (inline success/error, no redirect)
-    const form = document.getElementById('leadForm');
-    const success = document.getElementById('formSuccess');
-    const errorEl = document.getElementById('formError');
-
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      success.style.display = 'none';
-      errorEl.style.display = 'none';
-
-      const data = new FormData(form);
-      try{
-        const res = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: data
-        });
-        if(res.ok){
-          success.style.display = 'block';
-          form.reset();
-        } else {
-          const json = await res.json().catch(()=>({}));
-          errorEl.textContent = (json && json.errors && json.errors[0] && json.errors[0].message) || 'Something went wrong. Please try again.';
-          errorEl.style.display = 'block';
-        }
-      }catch(err){
-        errorEl.textContent = 'Network error. Please try again.';
-        errorEl.style.display = 'block';
+<script>
+  // Intersection animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('animate');
+        observer.unobserve(entry.target);
       }
     });
-  </script>
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.section-title, .card, .step, .faq-item, .about-text, .about-image, .form-shell')
+    .forEach(el => observer.observe(el));
+
+  // FAQ toggles
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click', ()=>{
+      item.classList.toggle('active');
+    });
+  });
+
+  // Formspree AJAX
+  const form = document.getElementById('leadForm');
+  const success = document.getElementById('formSuccess');
+  const errorEl = document.getElementById('formError');
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    success.style.display = 'none';
+    errorEl.style.display = 'none';
+
+    const data = new FormData(form);
+    try{
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      });
+      if(res.ok){
+        success.style.display = 'block';
+        errorEl.style.display = 'none';
+        form.reset();
+      } else {
+        const json = await res.json().catch(()=>({}));
+        errorEl.textContent = (json && json.errors && json.errors[0] && json.errors[0].message) || 'Something went wrong. Please try again.';
+        errorEl.style.display = 'block';
+      }
+    }catch(err){
+      errorEl.textContent = 'Network error. Please try again.';
+      errorEl.style.display = 'block';
+    }
+  });
+
+  // Chatbase widget
+  window.embeddedChatbotConfig = {
+    chatbotId: "0g4jgxlcgakdkwiqmvts02do0y7i21cj",
+    domain: "www.chatbase.co"
+  };
+  const cbScript = document.createElement('script');
+  cbScript.src = "https://www.chatbase.co/embed.min.js";
+  cbScript.defer = true;
+  document.body.appendChild(cbScript);
+</script>
 </body>
 </html>
